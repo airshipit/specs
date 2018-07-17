@@ -1,0 +1,6 @@
+# Sphinx artifacts
+/doc/build/
+/doc/*/_static/
+!/doc/source/_static/
+/AUTHORS
+/ChangeLog
