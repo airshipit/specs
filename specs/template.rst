@@ -4,9 +4,19 @@
 
   http://creativecommons.org/licenses/by/3.0/legalcode
 
+.. index::
+   single: template
+   single: creating specs
+
 .. note::
 
   Blueprints are written using ReSTructured text.
+
+Add index directives to help others find your spec. E.g.::
+
+  .. index::
+     single: template
+     single: creating specs
 
 =====================================
 Template: The title of your blueprint

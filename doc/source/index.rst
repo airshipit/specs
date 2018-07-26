@@ -6,8 +6,10 @@
 Airship Specs Documentation
 ===========================
 
-Proposed Specs
---------------
+:ref:`genindex`
+
+About Specs
+-----------
 
 .. toctree::
    :maxdepth: 1
@@ -32,4 +34,3 @@ Implemented Specs
    :glob:
 
    specs/implemented/*
-
