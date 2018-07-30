@@ -13,7 +13,6 @@
 - hosts: primary
   tasks:
     - name: Publish current merged documents on readthedocs
-      no_log: true
       uri:
         method: 'POST'
         body_format: 'json'

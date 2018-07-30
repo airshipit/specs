@@ -21,7 +21,7 @@ Instructions
 - New specs for review should be placed in the ``approved`` subfolder, where
   they will undergo review and approval in Gerrit_.
 - Specs that have finished implementation should be moved to the
-  ``implemented`` subfolder
+  ``implemented`` subfolder.
 
 Indexing and Categorization
 ---------------------------
