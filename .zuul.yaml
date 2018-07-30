@@ -1,0 +1,62 @@
+- project:
+    check:
+      jobs:
+        - airship-specs-doc-build
+
+    gate:
+      jobs:
+        - airship-specs-doc-build
+
+    post:
+      jobs:
+        - airship-specs-doc-publish
+
+- nodeset:
+    name: airship-specs-single-node
+    nodes:
+      - name: primary
+        label: ubuntu-xenial
+
+- job:
+    name: airship-specs-doc-build
+    description: |
+      Build documents locally to validate functionality
+    run: gate/playbooks/doc-build.yaml
+    timeout: 900
+    nodeset: airship-specs-single-node
+
+- job:
+    name: airship-specs-doc-publish
+    description: |
+      Publish documentation on airship-specs.readthedocs.io
+    run: gate/playbooks/doc-publish.yaml
+    secrets:
+      - airship_specs_readthedocs
+    timeout: 300
+    nodeset: airship-specs-single-node
+
+- secret:
+    name: airship_specs_readthedocs
+    data:
+      url: !encrypted/pkcs1-oaep
+        - w+FhusV0G8CTwapZN61r2y/X2hqy94gW8DocxV2voO/g0oNm+esDhDUxUR4XaihU+68yL
+          VOhbUbWBAGFs3oHGEPQMzMeSuSIFgctp9v91tLnECulNzmXm44pLr000w61EA2K5H2YRI
+          n9T8vOCBLSOnw4jjxp4I1G0x4uAZv6JNzk112hkwvEAyGsGBm00M88nJiNEHm1luIRt2Q
+          adS3hMFDLvpJ2D3C286bGeuCTbYWVMhPic11rMtMHOigQwrQs/pUWQgh+W06fg6G9Iokn
+          W4bWVVHdRVgRx08eG13Mec8J0Qn+sQhU8/cpZOob/XuYh5+jntTnTqB7Ig/xOY1AY9isy
+          yyaXHcQ/KJ7Px6kDfckIp9rlwnQ8vU53CnTgHaColx/2Qsrzaww/52JvBUGp/61Y/Folu
+          /UF2jnHBSIAT6hRosbkZcLY45J0sDBFcKXBJi9p/5CJTCX+Dg1OKL4hEPX2p1KQzGz+T6
+          uQiRbts5/+RpXE2qgw+RGhORIdLTxokKwyeNf+j0OBGMbho/eIo3gybo0AvPiDRwnBA6F
+          wd4Ub+z3tDGmt+9U8eLcTWRSArqlBFjgf9DMs2u4D1pXAtXXi0QYYF5YgnJWfVHAHVwkO
+          e2n7MMBVs/cHEryC8jYVC9R6yOcaJPY3q3FujQIYLiH0op2cRUeTOIgP4REMwg=
+      token: !encrypted/pkcs1-oaep
+        - JpdDUf95LcYP3ZblOsky/fkScHgOvXeSIS7OpBmWTHRTjWDKi6ZcmFwT1AA5h1oH0dKBC
+          8p40U4zVXfJg2S0aXbo8/VPNLfC2QwZG+vJqsrm+7O3Db2rahwwWqBv4DYsazcrlFtsjZ
+          MA8Qb+NAS68f2gSWbLu3tR8f6wf18J++hc3E3lfa+Qzt2hQDIkjXyPaFWavuzftw6ny4G
+          ViKHn503HEJ3wyGVZ/OzI/F7AOCnGo08QURSD7+1+ktp0FB9Namn6BfaKPKTunaMq1ECV
+          rJIubFmbz3Zv0r+H/eU1sJrFbSY+TcgHC9aSDU2jXfmGsiABptSGPoaqkjio7WSWlRQNg
+          77ws8o1kZTagW9fS1ohJ2lFnEBmWtATY5jaOsvdc6zmzmTpFgyxmaYZrmZMU5X7yO/iDa
+          Sn2CM2II6BecLtVi3VQTBCVEGqo9JVqD8NU1dDz5arz56+p+QBLv4YpjhHLe4A3Z5FmOo
+          qYrJiRZpx0gVgxJiWx58XJJ3UvlN9LpjCxRoySlL9KPYJFzRmbDUSuduf9scJ5EbzsaQ/
+          fIxmjGBs9LKjo+2wppRtabVQK+YyQ5KZW+fMzheAqwJt7uB1aJ5XMS8UZWDxH6/bgW8RH
+          MQK7Hi+9HD8GWsTm5YcdXuIZmhw27/iFoY0dcgBYiIrhMHwDXi9MzaZSfBeuzY=
