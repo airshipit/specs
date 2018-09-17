@@ -10,9 +10,9 @@
 Building Airship Specs Documentation
 ====================================
 
-Using the equivalent of `pip install sphinx`, install the sphinx-build command
-if it is not already installed.
+Find more documentation for Airship Specs on
+`Read the Docs <https://airship-specs.readthedocs.io/>`_.
 
-From the root of this project, issue the command `make html`.
+From the root of this project, issue the command `make docs`.
 Sphinx will render the output into doc/build/html. Open
 doc/build/html/index.html using your browser.
