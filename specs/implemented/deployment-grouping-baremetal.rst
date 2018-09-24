@@ -50,7 +50,7 @@ update_site workflow (and perhaps other workflows in the future) invokes
 Drydock to verify the site, prepare the site, prepare the nodes, and deploy the
 nodes. Each of these steps is described in the `Drydock Orchestrator Readme`_
 
-.. _Drydock Orchestrator Readme: https://git.openstack.org/cgit/openstack/airship-drydock/plain/drydock_provisioner/orchestrator/readme.md
+.. _Drydock Orchestrator Readme: https://git.openstack.org/cgit/openstack/airship-drydock/tree/python/drydock_provisioner/orchestrator/readme.md
 
 The prepare nodes and deploy nodes steps each involve intensive and potentially
 time consuming operations on the target nodes, orchestrated by Drydock and
@@ -69,7 +69,7 @@ Some factors that advise this solution:
 3. Miswiring or configuration of network hardware.
 4. Incorrect site design causing a mismatch against the hardware.
 5. Criticality of particular nodes to the realization of the site design.
-6. Desired configurability within the framework of the UCP declarative site
+6. Desired configurability within the framework of the Airship declarative site
    design.
 7. Improved visibility into the current state of node deployment.
 8. A desire to begin the deployment of nodes before the finish of the

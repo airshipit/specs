@@ -241,4 +241,4 @@ References
 
 .. _Kubernetes: https://kubernetes.io/
 .. _Kubernetes node labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
-.. _Baremetal Nodes: https://airshipit.readthedocs.io/projects/drydock/en/latest/topology.html#host-profiles-and-baremetal-nodes
+.. _Baremetal Nodes: https://airship-drydock.readthedocs.io/en/latest/topology.html#host-profiles-and-baremetal-nodes

@@ -258,7 +258,7 @@ Query Parameters:
 
 Responses
 ~~~~~~~~~
-All responses will be form of the UCP Status response.
+All responses will be form of the Airship Status response.
 
 -  Success: Code: 200, reason: Success
 
@@ -293,7 +293,7 @@ Query Parameters:
 
 Responses
 ~~~~~~~~~
-All responses will be form of the UCP Status response.
+All responses will be form of the Airship Status response.
 
 -  Success: Code: 200, reason: Success
 
@@ -327,14 +327,14 @@ Query Parameters:
 
 Responses
 ~~~~~~~~~
-All responses will be form of the UCP Status response.
+All responses will be form of the Airship Status response.
 
 -  Success: Code: 200, reason: Success
 
    The status of each etcd in the site will be returned in the details section.
    Valid values for status are: Healthy, Unhealthy
 
-https://github.com/att-comdev/ucp-integration/blob/master/docs/source/api-conventions.rst#status-responses
+https://github.com/openstack/airship-in-a-bottle/blob/master/doc/source/api-conventions.rst#status-responses
 
 .. code:: json
 
@@ -395,7 +395,7 @@ label added, and then perform the kubelet teardown.
 
 Responses
 ~~~~~~~~~
-All responses will be form of the UCP Status response.
+All responses will be form of the Airship Status response.
 
 -  Success: Code: 200, reason: Success
 
@@ -428,7 +428,7 @@ respond with a 409 Conflict response.
 
 Responses
 ~~~~~~~~~
-All responses will be form of the UCP Status response.
+All responses will be form of the Airship Status response.
 
 -  Success: Code: 200, reason: Success
 
@@ -501,7 +501,7 @@ Enhancements
 
    The completion tags should only be applied upon failure if the site action
    gets past document validation successfully (i.e. gets to the point where it
-   can start making changes via the other UCP components)
+   can start making changes via the other Airship components)
 
    This could result in a single revision having both site-action-success and
    site-action-failure if a later re-invocation of a site action is successful.
