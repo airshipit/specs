@@ -481,7 +481,7 @@ Scenario
 Multiple commits occur between site actions (deploy_site, update_site) - those
 actions that attempt to bring a site into compliance with a site design.
 When this occurs, the current system of being able to only see what has changed
-between committed and the the buffer versions (configdocs diff) is insufficient
+between committed and the buffer versions (configdocs diff) is insufficient
 to be able to investigate what has changed since the last successful (or
 unsuccessful) site action.
 To accommodate this, Shipyard needs several enhancements.
