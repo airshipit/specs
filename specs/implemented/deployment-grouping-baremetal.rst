@@ -392,7 +392,7 @@ DeploymentStrategy.
   part of the resolution of an overall ``baremetal nodes`` step.
   The baremetal nodes step will introduce functionality that reads in the
   deployment strategy (from the prior xcom), and can orchestrate the calls to
-  Drydock to enact the grouping, ordering and and success evaluation.
+  Drydock to enact the grouping, ordering and success evaluation.
   Note that Drydock will serialize tasks; there is no parallelization of
   prepare/deploy at this time.
 
