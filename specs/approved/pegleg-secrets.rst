@@ -71,7 +71,7 @@ example::
   schema: pegleg/PeglegManagedDocument/v1
   metadata:
     name: matches-document-name
-    schema: deckhand/Document/v1
+    schema: metadata/Document/v1
     labels:
       matching: wrapped-doc
     layeringDefinition:
@@ -103,7 +103,7 @@ example::
   schema: pegleg/PeglegManagedDocument/v1
   metadata:
     name: matches-document-name
-    schema: deckhand/Document/v1
+    schema: metadata/Document/v1
     labels:
       matching: wrapped-doc
     layeringDefinition:
