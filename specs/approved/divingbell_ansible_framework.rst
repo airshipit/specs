@@ -60,6 +60,7 @@ A separate directory structure needs to be created for adding the playbooks.
 Each Divingbell config can be a separate role within the playbook structure.
 
 ::
+
     - playbooks/
         - roles/
              - systcl/
@@ -83,6 +84,7 @@ With Divingbell DaemonSet running on each host mounted at ``hostPath``,
 ``hosts`` should be defined as given below within the ``master.yml``.
 
 ::
+
     hosts: all
     connection: chroot
 

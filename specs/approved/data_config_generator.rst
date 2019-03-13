@@ -150,12 +150,17 @@ Overall Architecture
 
   - Raw rack information from plugin:
 
+    ::
+
      vlan_network_data:
          oam:
              subnet: 12.0.0.64/26
              vlan: '1321'
 
+
   - Rules to define gateway, ip ranges from subnet:
+
+    ::
 
      rule_ip_alloc_offset:
          name: ip_alloc_offset
@@ -163,21 +168,22 @@ Overall Architecture
                  default: 10
                  gateway: 1
 
-   The above rule specify the ip offset to considered to define ip address for gateway, reserved
-   and static ip ranges from the subnet pool.
-   So ip range for 12.0.0.64/26 is : 12.0.0.65 ~ 12.0.0.126
-   The rule "ip_alloc_offset" now helps to define additional information as follows:
 
-     - gateway: 12.0.0.65 (the first offset as defined by the field 'gateway')
-     - reserved ip ranges: 12.0.0.65 ~ 12.0.0.76 (the range is defined by adding
-         "default" to start ip range)
-     - static ip ranges: 12.0.0.77 ~ 12.0.0.126 (it follows the rule that we need
-         to skip first 10 ip addresses as defined by "default")
+    The above rule specify the ip offset to considered to define ip address for gateway, reserved
+    and static ip ranges from the subnet pool.
+    So ip range for 12.0.0.64/26 is : 12.0.0.65 ~ 12.0.0.126
+    The rule "ip_alloc_offset" now helps to define additional information as follows:
+
+    - gateway: 12.0.0.65 (the first offset as defined by the field 'gateway')
+    - reserved ip ranges: 12.0.0.65 ~ 12.0.0.76 (the range is defined by adding
+      "default" to start ip range)
+    - static ip ranges: 12.0.0.77 ~ 12.0.0.126 (it follows the rule that we need
+      to skip first 10 ip addresses as defined by "default")
 
   - Intermediary YAML file information generated after applying the above rules
     to the raw rack information:
 
-::
+  ::
 
        network:
             vlan_network_data:
@@ -192,13 +198,13 @@ Overall Architecture
                 static_end: 12.0.0.126 ----+
                 vlan: '1321'
 
---
+  --
 
-   - J2 templates for specifying oam network data: It represents the format in
-     which the site manifests will be generated with values obtained from
-     Intermediary YAML
+  - J2 templates for specifying oam network data: It represents the format in
+    which the site manifests will be generated with values obtained from
+    Intermediary YAML
 
-::
+  ::
 
       ---
       schema: 'drydock/Network/v1'
@@ -230,12 +236,12 @@ Overall Architecture
             end: {{ data['network']['vlan_network_data']['oam']['static_end'] }}
       ...
 
---
+  --
 
-   - OAM Network information in site manifests after applying intermediary YAML to J2
-     templates.:
+  - OAM Network information in site manifests after applying intermediary YAML to J2
+    templates.:
 
-::
+  ::
 
       ---
       schema: 'drydock/Network/v1'
@@ -267,7 +273,7 @@ Overall Architecture
             end: 12.0.0.126
       ...
 
---
+  --
 
 Security impact
 ---------------
@@ -304,106 +310,114 @@ plugins.
 
   A. Excel Based Data Source.
 
-  - Gather the following input files:
+     - Gather the following input files:
 
-    1) Excel based site Engineering package. This file contains detail specification
-    covering IPMI, Public IPs, Private IPs, VLAN, Site Details, etc.
+       1) Excel based site Engineering package. This file contains detail specification
+          covering IPMI, Public IPs, Private IPs, VLAN, Site Details, etc.
+       2) Excel Specification to aid parsing of the above Excel file. It contains
+          details about specific rows and columns in various sheet which contain the
+          necessary information to build site manifests.
+       3) Site specific configuration file containing additional configuration like
+          proxy, bgp information, interface names, etc.
+       4) Intermediary YAML file. In this cases Site Engineering Package and Excel
+          specification are not required.
 
-    2) Excel Specification to aid parsing of the above Excel file. It contains
-    details about specific rows and columns in various sheet which contain the
-    necessary information to build site manifests.
+  B. Remote Data Source
 
-    3) Site specific configuration file containing additional configuration like
-    proxy, bgp information, interface names, etc.
+     - Gather the following input information:
 
-    4) Intermediary YAML file. In this cases Site Engineering Package and Excel
-    specification are not required.
-
-  B.  Remote Data Source
-
-  - Gather the following input information:
-
-    1) End point configuration file containing credentials to enable its access.
-    Each end-point type shall have their access governed by their respective plugins
-    and associated configuration file.
-
-    2) Site specific configuration file containing additional configuration like
-    proxy, bgp information, interface names, etc. These will be used if information
-    extracted from remote site is insufficient.
+       1) End point configuration file containing credentials to enable its access.
+          Each end-point type shall have their access governed by their respective plugins
+          and associated configuration file.
+       2) Site specific configuration file containing additional configuration like
+          proxy, bgp information, interface names, etc. These will be used if information
+          extracted from remote site is insufficient.
 
 * Program execution
-    1) CLI Options:
 
-      -g, --generate_intermediary  Dump intermediary file from passed Excel and
-                                   Excel spec.
-      -m, --generate_manifests     Generate manifests from the generated
-                                   intermediary file.
-      -x, --excel PATH             Path to engineering Excel file, to be passed
-                                   with generate_intermediary. The -s option is
-                                   mandatory with this option. Multiple engineering
-                                   files can be used. For example: -x file1.xls -x file2.xls
-      -s, --exel_spec PATH         Path to Excel spec, to be passed with
-                                   generate_intermediary. The -x option is
-                                   mandatory along with this option.
-      -i, --intermediary PATH      Path to intermediary file,to be passed
-                                   with generate_manifests. The -g and -x options
-                                   are not required with this option.
-      -d, --site_config PATH       Path to the site specific YAML file  [required]
-      -l, --loglevel INTEGER       Loglevel NOTSET:0 ,DEBUG:10,    INFO:20,
-                                   WARNING:30, ERROR:40, CRITICAL:50  [default:20]
-      -e, --end_point_config       File containing end-point configurations like user-name
-                                   password, certificates, URL, etc.
-      --help                       Show this message and exit.
+  1. CLI Options:
 
-     2) Example:
+     +-----------------------------+-----------------------------------------------------------+
+     | -g, --generate_intermediary | Dump intermediary file from passed Excel and              |
+     |                             | Excel spec.                                               |
+     +-----------------------------+-----------------------------------------------------------+
+     | -m, --generate_manifests    | Generate manifests from the generated                     |
+     |                             | intermediary file.                                        |
+     +-----------------------------+-----------------------------------------------------------+
+     | -x, --excel PATH            | Path to engineering Excel file, to be passed              |
+     |                             | with generate_intermediary. The -s option is              |
+     |                             | mandatory with this option. Multiple engineering          |
+     |                             | files can be used. For example: -x file1.xls -x file2.xls |
+     +-----------------------------+-----------------------------------------------------------+
+     | -s, --exel_spec PATH        | Path to Excel spec, to be passed with                     |
+     |                             | generate_intermediary. The -x option is                   |
+     |                             | mandatory along with this option.                         |
+     +-----------------------------+-----------------------------------------------------------+
+     | -i, --intermediary PATH     | Path to intermediary file,to be passed                    |
+     |                             | with generate_manifests. The -g and -x options            |
+     |                             | are not required with this option.                        |
+     +-----------------------------+-----------------------------------------------------------+
+     | -d, --site_config PATH      | Path to the site specific YAML file  [required]           |
+     +-----------------------------+-----------------------------------------------------------+
+     | -l, --loglevel INTEGER      | Loglevel NOTSET:0 ,DEBUG:10,    INFO:20,                  |
+     |                             | WARNING:30, ERROR:40, CRITICAL:50  [default:20]           |
+     +-----------------------------+-----------------------------------------------------------+
+     | -e, --end_point_config      | File containing end-point configurations like user-name   |
+     |                             | password, certificates, URL, etc.                         |
+     +-----------------------------+-----------------------------------------------------------+
+     | --help                      | Show this message and exit.                               |
+     +-----------------------------+-----------------------------------------------------------+
 
-     2-1) Using Excel spec as input data source:
+  2. Example:
 
-      Generate Intermediary: spyglass -g -x <DesignSpec> -s <excel spec> -d <site-config>
+    1) Using Excel spec as input data source:
 
-      Generate Manifest & Intermediary: spyglass -mg -x <DesignSpec> -s <excel spec> -d <site-config>
+       Generate Intermediary: ``spyglass -g -x <DesignSpec> -s <excel spec> -d <site-config>``
 
-      Generate Manifest with Intermediary: spyglass -m -i <intermediary>
+       Generate Manifest & Intermediary: ``spyglass -mg -x <DesignSpec> -s <excel spec> -d <site-config>``
 
+       Generate Manifest with Intermediary: ``spyglass -m -i <intermediary>``
 
-     2-1) Using external data source as input:
+    2) Using external data source as input:
 
-      Generate Manifest and Intermediary : spyglass -m -g -e<end_point_config> -d <site-config>
-      Generate Manifest : spyglass -m  -e<end_point_config> -d <site-config>
+       Generate Manifest and Intermediary: ``spyglass -m -g -e<end_point_config> -d <site-config>``
 
-      Note: The end_point_config shall include attributes of the external data source that are
-      necessary for its access. Each external data source type shall have its own plugin to configure
-      its corresponding credentials.
+       Generate Manifest: ``spyglass -m  -e<end_point_config> -d <site-config>``
+
+       .. note::
+
+         The end_point_config shall include attributes of the external data source that are
+         necessary for its access. Each external data source type shall have its own plugin to configure
+         its corresponding credentials.
 
 * Program output:
+
     a) Site Manifests: As an initial release, the program shall output manifest files for
        "airship-seaworthy" site. For example: baremetal, deployment, networks, pki, etc.
-       Reference:https://github.com/openstack/airship-treasuremap/tree/master/site/airship-seaworthy
+       Reference: https://github.com/openstack/airship-treasuremap/tree/master/site/airship-seaworthy
     b) Intermediary YAML: Containing aggregated site information generated from data sources that is
        used to generate the above site manifests.
 
 Future Work
 ============
-1) Schema based manifest generation instead of Jinja2 templates. It shall
-be possible to cleanly transition to this schema based generation keeping a unique
-mapping between schema and generated manifests. Currently this is managed by
-considering a mapping of j2 templates with schemas and site type.
-
-2) UI editor for intermediary YAML
+1. Schema based manifest generation instead of Jinja2 templates. It shall
+   be possible to cleanly transition to this schema based generation keeping a unique
+   mapping between schema and generated manifests. Currently this is managed by
+   considering a mapping of j2 templates with schemas and site type.
+2. UI editor for intermediary YAML
 
 
 Alternatives
 ============
-1) Schema based manifest generation instead of Jinja2 templates.
-2) Develop the data source plugins as an extension to Pegleg.
+1. Schema based manifest generation instead of Jinja2 templates.
+2. Develop the data source plugins as an extension to Pegleg.
 
 Dependencies
 ============
-1) Availability of a repository to store Jinja2 templates.
-2) Availability of a repository to store generated manifests.
+1. Availability of a repository to store Jinja2 templates.
+2. Availability of a repository to store generated manifests.
 
 References
 ==========
 
 None
-

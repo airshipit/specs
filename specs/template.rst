@@ -12,7 +12,7 @@
 
   Blueprints are written using ReSTructured text.
 
-Add index directives to help others find your spec. E.g.::
+Add *index* directives to help others find your spec by keywords. E.g.::
 
   .. index::
      single: template
@@ -27,9 +27,9 @@ Introduction paragraph -- What is this blueprint about?
 Links
 =====
 
-Include pertinent links to where the work is being tracked (e.g. Storyboard),
-as well as any other foundational information that may lend clarity to this
-blueprint
+Include pertinent links to where the work is being tracked (e.g. Storyboard ID
+and Gerrit topics), as well as any other foundational information that may lend
+clarity to this blueprint
 
 Problem description
 ===================

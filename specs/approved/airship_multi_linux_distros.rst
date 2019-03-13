@@ -5,18 +5,9 @@
   http://creativecommons.org/licenses/by/3.0/legalcode
 
 .. index::
-   single: template
-   single: creating specs
-
-.. note::
-
-  Blueprints are written using ReSTructured text.
-
-Add index directives to help others find your spec. E.g.::
-
-  .. index::
-     single: template
-     single: creating specs
+   single: Airship
+   single: multi-linux-distros
+   single: containers
 
 ===========================================
 Airship Multiple Linux Distribution Support
@@ -30,8 +21,9 @@ and other Linux distro's as new plugins.
 Links
 =====
 
-The work to author and implement this spec is tracked in Storyboard:
-https://storyboard.openstack.org/#!/story/2003699
+The work to author and implement this spec is tracked in Storyboard
+`2003699 <https://storyboard.openstack.org/#!/story/2003699>`_ and uses Gerrit
+topics ``airship_suse``, ``airship_rhel`` and similar.
 
 Problem description
 ===================

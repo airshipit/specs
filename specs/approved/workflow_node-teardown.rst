@@ -150,21 +150,26 @@ details:
 #. Drain the Kubernetes node.
 #. Clear the Kubernetes labels on the node.
 #. Remove etcd nodes from their clusters (if impacted).
+
    - if the node being decommissioned contains etcd nodes, Promenade will
-   attempt to gracefully have those nodes leave the etcd cluster.
+     attempt to gracefully have those nodes leave the etcd cluster.
+
 #. Ensure that etcd cluster(s) are in a stable state.
+
    - Polls for status every 30 seconds up to the etcd-ready-timeout, or the
-   cluster meets the defined minimum functionality for the site.
+     cluster meets the defined minimum functionality for the site.
    - A new document: promenade/EtcdClusters/v1 that will specify details about
-   the etcd clusters deployed in the site, including: identifiers,
-   credentials, and thresholds for minimum functionality.
+     the etcd clusters deployed in the site, including: identifiers,
+     credentials, and thresholds for minimum functionality.
    - This process should ignore the node being torn down from any calculation
-   of health
+     of health
+
 #. Shutdown the kubelet.
+
    - If this is not possible because the node is in a state of disarray such
-   that it cannot schedule the daemonset to run, this step may fail, but
-   should not hold up the process, as the Drydock dismantling of the node
-   will shut the kubelet down.
+     that it cannot schedule the daemonset to run, this step may fail, but
+     should not hold up the process, as the Drydock dismantling of the node
+     will shut the kubelet down.
 
 Responses
 ~~~~~~~~~
@@ -173,11 +178,9 @@ All responses will be form of the Airship Status response.
 -  Success: Code: 200, reason: Success
 
    Indicates that all steps are successful.
-
 -  Failure: Code: 404, reason: NotFound
 
    Indicates that the target node is not discoverable by Promenade.
-
 -  Failure: Code: 500, reason: DisassociateStepFailure
 
    The details section should detail the successes and failures further. Any
@@ -223,16 +226,13 @@ All responses will be form of the Airship Status response.
 
    Indicates that the drain node has successfully concluded, and that no pods
    are currently running
-
 -  Failure: Status response, code: 400, reason: BadRequest
 
    A request was made with parameters that cannot work - e.g. grace-period is
    set to a value larger than the timeout value.
-
 -  Failure: Status response, code: 404, reason: NotFound
 
    The specified node is not discoverable by Promenade
-
 -  Failure: Status response, code: 500, reason: DrainNodeError
 
    There was a processing exception raised while trying to drain a node. The
@@ -263,11 +263,9 @@ All responses will be form of the Airship Status response.
 -  Success: Code: 200, reason: Success
 
    All labels have been removed from the specified Kubernetes node.
-
 -  Failure: Code: 404, reason: NotFound
 
    The specified node is not discoverable by Promenade
-
 -  Failure: Code: 500, reason: ClearLabelsError
 
    There was a failure to clear labels that prevented completion. The details
@@ -298,11 +296,9 @@ All responses will be form of the Airship Status response.
 -  Success: Code: 200, reason: Success
 
    All etcd nodes have been removed from the specified node.
-
 -  Failure: Code: 404, reason: NotFound
 
    The specified node is not discoverable by Promenade
-
 -  Failure: Code: 500, reason: RemoveEtcdError
 
    There was a failure to remove etcd from the target node that prevented
@@ -315,7 +311,7 @@ Promenade Check etcd
 ~~~~~~~~~~~~~~~~~~~~
 Retrieves the current interpreted state of etcd.
 
-GET /etcd-cluster-health-statuses?design_ref={the design ref}
+  GET /etcd-cluster-health-statuses?design_ref={the design ref}
 
 Where the design_ref parameter is required for appropriate operation, and is in
 the same format as used for the join-scripts API.
@@ -334,42 +330,40 @@ All responses will be form of the Airship Status response.
    The status of each etcd in the site will be returned in the details section.
    Valid values for status are: Healthy, Unhealthy
 
-https://github.com/openstack/airship-in-a-bottle/blob/master/doc/source/api-conventions.rst#status-responses
+   https://github.com/openstack/airship-in-a-bottle/blob/master/doc/source/api-conventions.rst#status-responses
 
-.. code:: json
+   .. code:: json
 
-  { "...": "... standard status response ...",
-    "details": {
-      "errorCount": {{n}},
-      "messageList": [
-        { "message": "Healthy",
-          "error": false,
-          "kind": "HealthMessage",
-          "name": "{{the name of the etcd service}}"
-        },
-        { "message": "Unhealthy"
-          "error": false,
-          "kind": "HealthMessage",
-          "name": "{{the name of the etcd service}}"
-        },
-        { "message": "Unable to access Etcd"
-          "error": true,
-          "kind": "HealthMessage",
-          "name": "{{the name of the etcd service}}"
-        }
-      ]
-    }
-    ...
-  }
+     { "...": "... standard status response ...",
+       "details": {
+         "errorCount": {{n}},
+         "messageList": [
+           { "message": "Healthy",
+             "error": false,
+             "kind": "HealthMessage",
+             "name": "{{the name of the etcd service}}"
+           },
+           { "message": "Unhealthy"
+             "error": false,
+             "kind": "HealthMessage",
+             "name": "{{the name of the etcd service}}"
+           },
+           { "message": "Unable to access Etcd"
+             "error": true,
+             "kind": "HealthMessage",
+             "name": "{{the name of the etcd service}}"
+           }
+         ]
+       }
+       ...
+     }
 
 -  Failure: Code: 400, reason: MissingDesignRef
 
    Returned if the design_ref parameter is not specified
-
 -  Failure: Code: 404, reason: NotFound
 
    Returned if the specified etcd could not be located
-
 -  Failure: Code: 500, reason: EtcdNotAccessible
 
    Returned if the specified etcd responded with an invalid health response
@@ -400,11 +394,9 @@ All responses will be form of the Airship Status response.
 -  Success: Code: 200, reason: Success
 
    The kubelet has been successfully shutdown
-
 -  Failure: Code: 404, reason: NotFound
 
    The specified node is not discoverable by Promenade
-
 -  Failure: Code: 500, reason: ShutdownKubeletError
 
    The specified node's kubelet fails to shutdown. The details section of the
@@ -433,17 +425,14 @@ All responses will be form of the Airship Status response.
 -  Success: Code: 200, reason: Success
 
    The specified node has been removed from the Kubernetes cluster.
-
 -  Failure: Code: 404, reason: NotFound
 
    The specified node is not discoverable by Promenade
-
 -  Failure: Code: 409, reason: Conflict
 
    The specified node cannot be deleted due to checks that the node is
    drained/cordoned and has no labels (other than possibly
    `promenade-decomission: enabled`).
-
 -  Failure: Code: 500, reason: DeleteNodeError
 
    The specified node cannot be removed from the cluster due to an error from

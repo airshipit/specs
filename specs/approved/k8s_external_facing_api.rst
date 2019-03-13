@@ -45,7 +45,7 @@ Impacted components
 The following Airship components would be impacted by this solution:
 
 #. Promenade - Maintenance of the chart for external facing Kubernetes API
-servers
+   servers
 
 Proposed change
 ===============

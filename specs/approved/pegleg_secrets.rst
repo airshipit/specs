@@ -5,8 +5,8 @@
   http://creativecommons.org/licenses/by/3.0/legalcode
 
 .. index::
-   single: template
-   single: creating specs
+   single: Pegleg
+   single: Security
 
 =======================================
 Pegleg Secret Generation and Encryption

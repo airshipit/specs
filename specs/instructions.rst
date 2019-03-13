@@ -20,6 +20,12 @@ Instructions
   a short explanation.
 - New specs for review should be placed in the ``approved`` subfolder, where
   they will undergo review and approval in Gerrit_.
+- Test if the spec file renders correctly in a web-browser by running
+  ``make docs`` command and opening ``doc/build/html/index.html`` in a
+  web-browser. Ubuntu needs the following packages to be installed::
+
+    apt-get install -y make tox gcc python3-dev
+
 - Specs that have finished implementation should be moved to the
   ``implemented`` subfolder.
 
@@ -50,38 +56,38 @@ Use the following guidelines to determine the category to use for a document:
 1) For new functionality and features, the best choice for a category is to
    match a functional duty of Airship.
 
-site-definition
-  Parts of the platform that support the definition of a site, including
-  management of the yaml definitions, document authoring and translation, and
-  the collation of source documents.
+   site-definition
+     Parts of the platform that support the definition of a site, including
+     management of the yaml definitions, document authoring and translation, and
+     the collation of source documents.
 
-genesis
-  Used for the steps related to preparation and deployment of the genesis node
-  of an Airship deployment.
+   genesis
+     Used for the steps related to preparation and deployment of the genesis node
+     of an Airship deployment.
 
-baremetal
-  Those changes to Airflow that provide for the lifecycle of bare metal
-  components of the system - provisioning, maintenance, and teardown. This
-  includes booting, hardware and network configuration, operating system, and
-  other host-level management
+   baremetal
+     Those changes to Airflow that provide for the lifecycle of bare metal
+     components of the system - provisioning, maintenance, and teardown. This
+     includes booting, hardware and network configuration, operating system, and
+     other host-level management
 
-k8s
-  For functionality that is about interfacing with Kubernetes directly, other
-  than the initial setup that is done during genesis.
+   k8s
+     For functionality that is about interfacing with Kubernetes directly, other
+     than the initial setup that is done during genesis.
 
-software
-  Functionality that is related to the deployment or redeployment of workload
-  onto the Kubernetes cluster.
+   software
+     Functionality that is related to the deployment or redeployment of workload
+     onto the Kubernetes cluster.
 
-workflow
-  Changes to existing workflows to provide new functionality and creation of
-  new workflows that span multiple other areas (e.g. baremetal, k8s, software),
-  or those changes that are new arrangements of existing functionality in one
-  or more of those other areas.
+   workflow
+     Changes to existing workflows to provide new functionality and creation of
+     new workflows that span multiple other areas (e.g. baremetal, k8s, software),
+     or those changes that are new arrangements of existing functionality in one
+     or more of those other areas.
 
-administration
-  Security, logging, auditing, monitoring, and those things related to site
-  administrative functions of the Airship platform.
+   administration
+     Security, logging, auditing, monitoring, and those things related to site
+     administrative functions of the Airship platform.
 
 2) For specs that are not feature focused, the component of the system may
    be the best choice for a category, e.g. ``shipyard``, ``armada`` etc...

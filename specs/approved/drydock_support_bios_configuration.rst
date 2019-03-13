@@ -193,14 +193,10 @@ Work Items
 ----------
 
 - Update Hardware profile schema to support new attribute bios_setting
-
 - Update Hardware profile objects
-
 - Update Orchestrator action PrepareNodes to call OOB driver for BIOS
   configuration
-
 - Update Redfish OOB driver to support new action ConfigBIOS
-
 - Add unit test cases
 
 Assignee(s):
@@ -215,8 +211,8 @@ Other contributors:
 Dependencies
 ============
 
-This spec depends on ``Introduce Redfish based OOB Driver for Drydock``
-https://storyboard.openstack.org/#!/story/2003007
+This spec depends on `Introduce Redfish based OOB Driver for Drydock <https://storyboard.openstack.org/#!/story/2003007>`_
+story.
 
 References
 ==========
