@@ -61,6 +61,34 @@ Most Airship components will be impacted by this spec:
 Proposed change
 ===============
 
+Container Builds
+----------------
+
+- As for now, Ubuntu-based containers remain to be default to be built
+- CI system for the Ubuntu-based containers must not be affected by
+  implementation of this spec (Zuul jobs, Makefile, etc.)
+- Distributive-dependant ``Dockerfile`` naming convention is to add a
+  distributive flavour suffix, optionally specifying version after underscore:
+  ``Dockerfile.<distributive flavour>[_<version>]``; e.g.
+  ``Dockerfile.opensuse``
+- Public non-Ubuntu container images are to be published along with Ubuntu-based
+  images on `quay.io`_ under
+  `airshipit/ <https://quay.io/organization/airshipit>`_ organization
+- Repository naming convention remains exactly same for airship component.
+  ``airshipit/<airship component>``;
+  e.g. ``airshipit/armada``
+- Updated image tagging naming convention is to add a dash separator suffix
+  after tags based on Git commit ID of the code ``:<git commit id>``, and
+  additional ``:master`` (branch-based) and ``:latest`` (latest master) tags,
+  following with a distributive flavour, optionally specifying distribution
+  version after underscore [#f1]_:
+  ``<airship component>:<branch or commit-id>-<distributive flavour>[_<distro major version>]``;
+  e.g. ``armada:master-opensuse_15``
+- As for now, Makefiles, Shell scripts, Shell script templates in Helm charts,
+  Ansible jobs, Zuul and Jenkins jobs continue to work without changes for
+  Ubuntu-based containers, and support non-Ubuntu containers by provision of
+  additional variables or command line arguments
+
 Pegleg
 ------
 
@@ -259,3 +287,10 @@ References
 ==========
 
 Any external references (other than the direct links above)
+
+.. rubric:: Footnotes
+
+.. [#f1] Based on recommendation from `quay.io`_
+         technical support.
+
+.. _quay.io: https://quay.io/
