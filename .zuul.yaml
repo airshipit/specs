@@ -15,3 +15,4 @@
       - docs-on-readthedocs
     vars:
       rtd_webhook_id: '43959'
+      rtd_project_name: 'airship-specs'
