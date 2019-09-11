@@ -18,8 +18,9 @@ Instructions
 - Attempt to detail each applicable section.
 - If a section does not apply, use N/A, and optionally provide
   a short explanation.
-- New specs for review should be placed in the ``approved`` subfolder, where
-  they will undergo review and approval in Gerrit_.
+- New specs for review should be placed in the ``approved`` subfolder of
+  ``1.x`` or ``2.x`` directories (depending on Airship version they primarily
+  belong to), where they will undergo review and approval in Gerrit_.
 - Test if the spec file renders correctly in a web-browser by running
   ``make docs`` command and opening ``doc/build/html/index.html`` in a
   web-browser. Ubuntu needs the following packages to be installed::
@@ -27,7 +28,7 @@ Instructions
     apt-get install -y make tox gcc python3-dev
 
 - Specs that have finished implementation should be moved to the
-  ``implemented`` subfolder.
+  ``implemented`` subfolder of respective ``1.x`` or ``2.x`` directories.
 
 Indexing and Categorization
 ---------------------------

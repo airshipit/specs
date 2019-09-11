@@ -17,20 +17,44 @@ About Specs
 
    specs/*
 
+Airship 2.x
+-----------
+
 Approved Specs
---------------
+~~~~~~~~~~~~~~
 
 .. toctree::
    :maxdepth: 1
    :glob:
 
-   specs/approved/*
+   specs/2.x/approved/*
 
 Implemented Specs
------------------
+~~~~~~~~~~~~~~~~~
 
 .. toctree::
    :maxdepth: 1
    :glob:
 
-   specs/implemented/*
+   specs/2.x/implemented/*
+
+Airship 1.x
+-----------
+
+Approved Specs
+~~~~~~~~~~~~~~
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   specs/1.x/approved/*
+
+Implemented Specs
+~~~~~~~~~~~~~~~~~
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   specs/1.x/implemented/*
